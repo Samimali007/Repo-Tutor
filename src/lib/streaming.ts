@@ -1,4 +1,6 @@
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-repo`;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://arrlgvobjoxdivnbnuok.supabase.co";
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFycmxndm9iam94ZGl2bmJudW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MTU3MzAsImV4cCI6MjA5MzM5MTczMH0.g8ZzRaV1ZmGX6VHYmVFZzxp1L-DmmYk1BqikADm8NIs";
+const CHAT_URL = `${SUPABASE_URL}/functions/v1/analyze-repo`;
 
 export type Msg = { role: "user" | "assistant"; content: string };
 
@@ -25,7 +27,7 @@ export async function streamAI({
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
     },
     body: JSON.stringify({ messages, repoUrl, readme, repoInfo, action }),
   });
